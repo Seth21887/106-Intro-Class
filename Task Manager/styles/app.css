@@ -1,0 +1,58 @@
+h1{
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 10px 0;
+    background-color: rgb(82,63,91);
+}
+.main{
+    display:flex;
+
+}
+#list{
+    flex: 5;
+    min-height: calc(100vh - 89px); /*this calculation is 100vh being the length of the screen top to bottom, subtracting the size of the heading*/
+}
+
+#form{
+    flex: 3;
+    min-height: calc(100vh - 89px);
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid;
+    border-radius: 6px;
+}
+.control{
+    color: rgb(82,63,91);
+}
+.form-control{
+    margin-bottom:12px;
+}
+
+.iImportant{
+    font-size: 32px;
+    cursor: pointer;
+}
+
+#form .control .fas{
+    color: rgb(82,63,91);
+}
+#form .control .far{
+    color: lightgrey
+}
+
+#form .control label{
+    font-weight: 700;
+}
+#form h3{
+    text-align: center;
+    font-weight: 700;
+    color: rgb(75,66,80);
+    font-family: "Segoe UI", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#btnTogglePanel{
+    color: white;
+    background-color:rgb(82,63,91);
+    margin: 10px;
+}
