@@ -7,6 +7,7 @@ h1{
 }
 .main{
     display:flex;
+    background-color:rgb(240, 233, 240);
 
 }
 #list{
@@ -19,8 +20,9 @@ h1{
     min-height: calc(100vh - 89px);
     padding: 20px;
     background-color: #f4f4f4;
-    border: 1px solid;
+    border: 1px solid rgb(82,63,91);
     border-radius: 6px;
+    margin: 10px;
 }
 .control{
     color: rgb(82,63,91);
@@ -42,12 +44,12 @@ h1{
 }
 
 #form .control label{
-    font-weight: 700;
+    font-weight: 400;
 }
 #form h3{
     text-align: center;
-    font-weight: 700;
-    color: rgb(75,66,80);
+    font-weight: 400;
+    color: rgb(82,63,91);
     font-family: "Segoe UI", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
