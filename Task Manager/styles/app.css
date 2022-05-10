@@ -8,11 +8,24 @@ h1{
 .main{
     display:flex;
     background-color:rgb(240, 233, 240);
+    background-image:url("../Images/task-list-template.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
 
 }
 #list{
     flex: 5;
     min-height: calc(100vh - 89px); /*this calculation is 100vh being the length of the screen top to bottom, subtracting the size of the heading*/
+    position:relative;
+    padding-top:60px;
+}
+#btnTogglePanel{
+    color: white;
+    background-color:rgb(82,63,91);
+    margin: 10px;
+    position: absolute;
+    right: 10px;
+    top:10px
 }
 
 #form{
@@ -53,8 +66,29 @@ h1{
     font-family: "Segoe UI", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#btnTogglePanel{
-    color: white;
-    background-color:rgb(82,63,91);
+.task-item{
+    padding: 10px;
     margin: 10px;
+    background-color: #f4f4f4;
+    display:flex;
+    border-radius:5px;
+}
+.task-item h5{
+    font-weight:700;
+}
+.task-item .info-1{
+    flex: 3;
+}
+.task-item .info-2{
+    flex: 1;
+}
+.task-item .info-2 label{
+    display:block;
+}
+.task-item .info-3{
+    flex: 1;
+}
+.task-item:hover{
+    border-color:yellow !important;
+    border-left-width: 6px;
 }
