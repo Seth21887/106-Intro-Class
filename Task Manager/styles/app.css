@@ -28,6 +28,11 @@ h1{
     top:10px
 }
 
+#btnDeleteTasks{
+    margin: 10px;
+
+}
+
 #form{
     flex: 3;
     min-height: calc(100vh - 89px);
@@ -90,5 +95,5 @@ h1{
 }
 .task-item:hover{
     border-color:yellow !important;
-    border-left-width: 6px;
+    border-left-width: 10px !important;
 }

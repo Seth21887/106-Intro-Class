@@ -2,6 +2,7 @@ const iconImportant = "iImportant fas fa-star";
 const iconNonImportant = "iImportant far fa-star";
 var important = false;
 var panelVisible = true;
+var total = 0;
 
 function toggleImportance(){
     console.log("Clicked");
@@ -20,9 +21,11 @@ function togglePanel(){
     if(panelVisible){
         $("#form").hide();
         panelVisible = false;
+        $("#btnTogglePanel").text("< Show Form");
     }else{
         $("#form").show();
         panelVisible = true;
+        $("#btnTogglePanel").text("Hide Form >");
     }
 }
 
@@ -39,8 +42,40 @@ function saveTask(){
 
     //create an object
     let task = new Task(important,title,desc,dueDate,location,invites,color,frequency,status);
-    console.log(task);
-    displayTask(task);
+    
+
+    //for encoding, there are two main methods: JSON and XML
+
+    $.ajax({ //asynchronous javascript xml
+        type: "post", //we're using a post because we want to save data
+        url: "https://fsdiapi.azurewebsites.net/api/tasks/",
+        data: JSON.stringify(task), //data must be a string, a value, or a boolean
+        contentType: "application/json",
+        success: function(successDetails){
+            console.log("Task Saved", successDetails);
+            displayTask(task);
+            clearForm();
+            total += 1;
+            $("#headCount").text("You have " + total + " tasks");
+        },
+        error: function(errorDetails){
+            console.error("Save Failed", errorDetails);
+        }
+
+    });
+}
+
+function clearForm(){
+    $("#txtTitle").val(""); //.val is to read, .val with a parameter is to write
+    $("#txtDesc").val("");
+    $("#selDate").val("");
+    $("#txtLocation").val("");
+    $("#txtInvites").val("");
+    $("#selColor").val("#000000");
+    $("#selFrequency").val("0");
+    $("#selStatus").val("1");
+    important = true;
+    toggleImportance(); //as its set on true, this function will automatically get it back to not-important when it clears
 }
 
 function getStatusText(status){
@@ -107,14 +142,69 @@ function displayTask(task){
     $("#tasks").append(syntax);
 }
 
+
+function fetchTasks(){
+    $.ajax({
+        type: "get",
+        url: "https://fsdiapi.azurewebsites.net/api/tasks",
+        success: function(successDetails){
+            let data = JSON.parse(successDetails); //we have to decode from string to object in this function
+            console.log(data); 
+
+            //create a total variable
+            total = 0;
+            for(let i=0;i<data.length;i++){
+                let task = data[i];
+                if(task.name == "Seth"){
+                    total+= 1;
+                    displayTask(task);
+                }
+            }
+            //travel the array
+            //if the task is yours, increase the total by 1
+
+            //for loop over data
+            //get every element inside the array
+            //send the element to the display function
+            
+            
+            //send the text (counter) to the heading #headCount
+            $("#headCount").text("You have " + total + " tasks");
+        },
+        error: function(errorDetails){
+            console.error("Error retrieving data", errorDetails);
+        }
+    });
+}
+
+//DELETE request
+// /api/products/clear/Seth
+function deleteTasks(){
+    $.ajax({
+        type: "delete",
+        url: "https://fsdiapi.azurewebsites.net/api/tasks/clear/Seth",
+        success: function(){
+            //reload the page
+            location.reload();
+        },
+        error: function(err){
+            console.log("Error clearing tasks", err)
+        }
+    })
+}
+
 function init(){
 
     //assign events
     $("#iImportant").click(toggleImportance);
     $("#btnTogglePanel").click(togglePanel);
     $("#saveTask").click(saveTask);
+    $("#btnDeleteTasks").click(deleteTasks);
+
     //load data
+    fetchTasks();
 
 }
+
 
 window.onload = init;
